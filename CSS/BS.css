@@ -1,0 +1,1143 @@
+/* =================== CẤU HÌNH CHUNG =================== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(to right, #FF1493, #FF7F50, #6A0DAD);
+  color: #add8e6; /* xanh dương nhạt */
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+
+
+.language-switcher button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.language-switcher button:hover {
+  background-color: #e0e0e0;
+}
+
+.flag-icon {
+  width: 20px;
+  height: 14px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+
+/* =================== CONTAINER =================== */
+body.dark-mode {
+  background: linear-gradient(to right, #1a1a1a, #2c2c2c, #1a1a1a);
+  color: #add8e6;
+}
+
+body.light-mode {
+  background: linear-gradient(to right, #ffd6e8, #ffd1b3, #e6ccff);
+  color: #add8e6;
+}
+
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px #FF7F50;
+  border: 2px solid #FF7F50;
+  color: #add8e6;
+}
+
+.container.light-mode {
+  box-shadow: 0 0 15px #cc6600;
+  border: 2px solid #cc6600;
+}
+
+.container.dark-mode {
+  box-shadow: 0 0 15px #FF7F50;
+  border: 2px solid #FF7F50;
+}
+
+/* Cột trái */
+.left-column {
+  width: 30%;
+  background: transparent;
+  padding: 20px;
+  text-align: center;
+  border-right: 2px solid #FF7F50;
+  color: #add8e6;
+
+}
+
+.left-column.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.left-column.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Tên */
+.left-column h2 {
+  color: #add8e6;
+  text-shadow: 0 0 10px #add8e6, 0 0 20px #add8e6;
+  border: 2px solid rgba(173, 216, 230, 0.5);
+  padding: 10px;
+  display: inline-block;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #add8e6;
+}
+
+.left-column.light-mode h2 {
+  text-shadow: none;
+}
+
+/* Ảnh */
+.profile img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid #add8e6;
+  box-shadow: 0 0 10px #add8e6;
+  transition: transform 0.3s ease;
+}
+
+.profile img:hover {
+  transform: scale(1.05);
+}
+
+/* Cột phải */
+.right-column {
+  width: 70%;
+  padding: 30px;
+  background: transparent;
+  color: #add8e6;
+}
+
+.right-column.light-mode {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.right-column.dark-mode {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Mục thông tin */
+.section-link {
+  background: transparent;
+  backdrop-filter: blur(5px);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 1px solid #add8e6;
+  color: #add8e6;
+}
+
+.section-link.light-mode {
+  border: 1px solid #333333;
+  color: #000000;
+  background-color: #f9f9f9;
+}
+
+.section-link.dark-mode {
+  border: 1px solid #add8e6;
+  color: #add8e6;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.section-link h2 {
+  color: inherit;
+}
+
+
+/* Các lớp hiệu ứng */
+.detail {
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.detail.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Khung nền mờ cho nội dung */
+.container-page {
+  position: relative;
+  background: transparent;
+  backdrop-filter: blur(5px);
+  color: #add8e6; /* xanh dương nhạt */
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #add8e6;
+  text-align: center;
+  border: 2px solid #add8e6;
+}
+
+/* Áp dụng hiệu ứng phát quang cho chữ */
+.jt {
+  color: #add8e6; /* xanh dương nhạt */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Tiêu đề */
+h1,
+h2 {
+  color: #add8e6; /* xanh dương nhạt */
+  text-shadow: 0 0 10px #add8e6;
+}
+
+/* Định dạng chữ */
+p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #add8e6; /* xanh dương nhạt */
+}
+
+/* chuyển ngôn ngữ */
+#language-switcher {
+  gap: 10px;
+}
+
+.language-switcher button {
+  background-color: #4d004d;
+  color: #add8e6; /* xanh dương nhạt */
+  border: 2px solid #add8e6;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.language-switcher button:hover {
+  background-color: #add8e6;
+  color: #4d004d;
+}
+
+/* theme switcher */
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 14px;
+  background-color: #f7e6c4;
+  color: #663366;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  background-color: #add8e6;
+  color: #4d004d;
+}
+
+.theme-button img {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.theme-button:hover img {
+  transform: rotate(20deg);
+}
+
+
+
+
+/* Địa chỉ liên hệ */
+.left-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  width: 270px;
+  color: #add8e6; /* xanh dương nhạt */
+}
+/* Đổi màu chữ liên tục */
+@keyframes colorShift {
+  0%   { color: #add8e6; }
+  25%  { color: #87cefa; }
+  50%  { color: #b0e0e6; }
+  75%  { color: #afeeee; }
+  100% { color: #add8e6; }
+}
+
+.contact .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #add8e6;
+  animation: colorShift 4s linear infinite;
+}
+
+.contact .icon img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.contact .icon:hover img {
+  transform: scale(1.1);
+}
+
+.contact .icon:hover span {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  color: #add8e6;
+  animation: colorShift 4s linear infinite;
+  background-color: #660033;
+  padding: 10px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.4);
+  width: auto;
+  max-width: 200px;
+}
+
+.contact .icon span {
+  visibility: hidden;
+  opacity: 0;
+}
+#backButton {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: linear-gradient(45deg, #6a0dad, #ff1493);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1000;
+}
+
+#backButton:hover {
+  animation: glowing 1.5s infinite alternate;
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.9);
+}
+
+
+@keyframes glowing {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 5px #ff1493, 0 0 20px #ff1493, 0 0 30px #6a0dad;
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 15px #ff7f50, 0 0 40px #ff7f50, 0 0 60px #6a0dad;
+  }
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 5px #ff1493, 0 0 20px #ff1493, 0 0 30px #6a0dad;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Thêm hiệu ứng 'hiện dần' */
+.fade-in {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+}
+
+/* Các animation khác nhau */
+@keyframes fadeInMoveUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+.nut-dat-lich {
+  display: block; /* Để nút có thể căn chỉnh bằng margin hoặc align-self */
+  width: -moz-fit-content;
+  width: fit-content;
+  /* Để căn giữa nút trong .left-column (vì .left-column là flex, align-items: flex-start): */
+  align-self: center; 
+  margin-top: 20px; /* Khoảng cách với phần tử bên trên */
+  margin-bottom: 10px; /* Khoảng cách với phần tử bên dưới (nếu có) */
+  
+  background: linear-gradient(45deg, #6a0dad, #ff1493);
+  color: white;
+  text-decoration: none; /* Bỏ gạch chân của thẻ <a> */
+  border: none;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nut-dat-lich:hover {
+  animation: glowing 1.5s infinite alternate; /* Đảm bảo bạn đã có @keyframes glowing */
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 6px 20px rgba(255, 20, 147, 0.9);
+}
+/* =================== ĐIỀU CHỈNH CHO MOBILE =================== */
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .left-column {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Đẩy nhóm icon xuống dưới */
+    text-align: center;
+    padding: 20px 15px; /* Điều chỉnh padding cho phù hợp với ảnh lớn */
+    box-sizing: border-box;
+    border-right: none;
+  }
+
+  /* Các phần tử con trực tiếp trừ cái cuối (contact) */
+  .left-column > *:not(.contact) {
+    margin-bottom: 15px;
+  }
+
+  .left-column > img {
+    width: 80vw; /* Ảnh chiếm 80% chiều rộng màn hình */
+    height: 80vw; /* Giữ tỷ lệ vuông, hoặc dùng auto nếu ảnh không vuông */
+    max-width: 320px; /* Giới hạn kích thước tối đa thực tế trên màn hình lớn hơn một chút */
+    max-height: 320px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 20px; /* Thêm khoảng cách ở trên nếu cần */
+  }
+
+  .job-title {
+    font-size: 1.1em;
+  }
+
+  /* Bỏ flex, icon sẽ xếp dọc tự nhiên */
+  .contact {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Reset margin, margin-top sẽ tự động hoặc đặt cụ thể */
+    width: auto; /* Để khối co lại theo nội dung */
+    align-self: flex-start; /* Căn khối contact sang trái */
+    margin-bottom: 20px; /* Khoảng cách với đáy màn hình */
+    margin-left: 15px; /* Khoảng cách với lề trái */
+  }
+
+  .contact .icon {
+    margin-bottom: 12px; /* Khoảng cách giữa các icon xếp dọc */
+  }
+  .contact .icon:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact .icon img {
+    width: 40px;
+    height: 40px;
+    display: block; /* Để đảm bảo căn chỉnh đúng và không có khoảng trống lạ */
+  }
+
+  .contact .icon:hover span {
+
+    left: 30%; /* Đẩy tooltip sang phải icon */
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .theme-switcher,
+  .language-switcher,
+  #backButton {
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+    will-change: opacity, transform;
+  }
+
+  .controls-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: translateY(-20px) !important;
+  }
+
+  #backButton.hidden-initially {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+  }
+  #backButton.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .theme-switcher {
+    top: 15px;
+    right: 15px;
+    z-index: 1001;
+  }
+
+  .language-switcher {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1001;
+  }
+  #backButton {
+    bottom: 15px;
+    left: 15px;
+    z-index: 1000;
+  }
+
+  .right-column {
+    width: 100%;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    border-top: 2px solid #FF7F50;
+  }
+  .right-column.light-mode {
+    border-top-color: #cc6600;
+  }
+  .right-column.dark-mode {
+    border-top-color: #FF7F50;
+  }
+
+  .right-column .section-link {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-column {
+    padding: 15px 10px;
+  }
+
+  .left-column > img {
+    width: 80vw; /* Vẫn giữ 80vw cho màn hình nhỏ hơn */
+    height: 80vw;
+    max-width: 280px; /* Điều chỉnh max-width cho màn hình rất nhỏ */
+    max-height: 280px;
+    margin-top: 15px;
+  }
+  .left-column > h2 {
+    font-size: 1.2em;
+  }
+
+  .job-title {
+    font-size: 1em;
+  }
+
+  .contact {
+    margin-left: 10px; /* Giảm khoảng cách lề trái cho màn hình rất nhỏ */
+    margin-bottom: 15px;
+  }
+
+  .contact .icon {
+    margin-bottom: 10px;
+  }
+
+  .contact .icon img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .right-column {
+    padding: 20px 10px;
+  }
+}
+
+
+
+
+/* Đặt Lịch*/
+/* Giữ lại các style body, .container, .left-column, .right-column, .section-link, .detail etc. từ trước */
+/* Nhưng loại bỏ các style cho .language-switcher và .theme-switcher riêng lẻ nếu chúng không còn trong HTML */
+
+/* =================== GLOBAL CONTROLS =================== */
+.control-button { /* Style chung cho các nút điều khiển cố định */
+  position: fixed;
+  z-index: 1002;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2em; /* Kích thước icon */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.control-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+body.dark-mode .control-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+body.dark-mode .control-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+
+/* Settings Menu */
+.settings-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1003; /* Cao nhất */
+}
+
+
+/* Cập nhật trong phần .settings-container hoặc .settings-icon-button */
+.settings-icon-button {
+ 
+  width: 55px;  /* Tăng từ 50px */
+  height: 55px; /* Tăng từ 50px */
+  font-size: 1.5em; /* Tăng kích thước icon bên trong */
+  border-radius: 50%; /* Giữ hình tròn */
+  padding: 0;
+}
+.settings-icon-button i {
+  transition: transform 0.4s ease-in-out;
+}
+.settings-container.active .settings-icon-button i {
+  transform: rotate(180deg);
+}
+
+.settings-options {
+  position: absolute;
+  top: 110%; /* Ngay dưới icon */
+  left: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px) scale(0.95);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+  min-width: 200px;
+}
+.settings-container.active .settings-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+body.dark-mode .settings-options {
+  background-color: #2c2c2c; /* Màu nền tối cho menu */
+  border: 1px solid #444;
+}
+
+.settings-option-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  text-align: left;
+  width: 100%;
+  color: #333;
+  transition: background-color 0.2s ease;
+  text-decoration: none; /* Cho thẻ <a> */
+}
+.settings-option-button i {
+  width: 20px; /* Đảm bảo icon có không gian cố định */
+  text-align: center;
+  color: #555;
+}
+.settings-option-button:hover {
+  background-color: #f0f0f0;
+}
+body.dark-mode .settings-option-button {
+  color: #e0e0e0;
+}
+body.dark-mode .settings-option-button i {
+  color: #aaa;
+}
+body.dark-mode .settings-option-button:hover {
+  background-color: #3a3a3a;
+}
+
+
+/* Back Button */
+.back-button { /* Kế thừa từ .control-button */
+  bottom: 20px;
+  right: 20px;
+  padding-left: 12px; /* Điều chỉnh để icon và text cân đối */
+}
+.back-button span {
+  font-size: 0.6em; /* Chữ nhỏ hơn icon */
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+/* Hidden class for scroll effects (nếu cần, JS sẽ quản lý) */
+.controls-hidden {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(-20px) !important;
+}
+#backButton.hidden-initially {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px);
+}
+#backButton.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+/* =================== BOOKING PAGE SPECIFIC STYLES =================== */
+.booking-page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Để form không bị đẩy xuống nếu nội dung trên dài */
+  min-height: 100vh;
+  padding: 80px 20px 50px 20px; /* Padding cho toàn trang, chừa không gian cho nút fixed */
+  box-sizing: border-box;
+}
+
+.booking-container-page {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  color: #333;
+  max-width: 650px;
+  width: 100%;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  border: 1px solid rgba(200, 200, 200, 0.3);
+}
+
+body.dark-mode .booking-container-page {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(10px);
+  color: #e0e0e0;
+  box-shadow: 0 0 20px rgba(173, 216, 230, 0.3);
+  border: 1px solid rgba(173, 216, 230, 0.2);
+}
+
+.booking-container-page h1 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 2.2em;
+  font-weight: 700;
+  color: #FF1493;
+}
+body.dark-mode .booking-container-page h1 {
+  color: #FF7F50;
+  text-shadow: 0 0 10px rgba(255, 127, 80, 0.5);
+}
+
+.booking-container-page #booking-doctor-info {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.15em;
+}
+.doctor-name-highlight {
+    font-weight: 600;
+    color: #6A0DAD;
+}
+body.dark-mode .doctor-name-highlight {
+    color: #FF1493;
+}
+
+.appointment-form .form-group {
+  margin-bottom: 22px;
+}
+.form-group-half {
+    display: flex;
+    gap: 20px;
+}
+.form-group-half > div {
+    flex: 1;
+}
+
+.appointment-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.appointment-form input[type="text"],
+.appointment-form input[type="tel"],
+.appointment-form input[type="email"],
+.appointment-form input[type="date"],
+.appointment-form select,
+.appointment-form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 1em;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .appointment-form input[type="text"],
+body.dark-mode .appointment-form input[type="tel"],
+body.dark-mode .appointment-form input[type="email"],
+body.dark-mode .appointment-form input[type="date"],
+body.dark-mode .appointment-form select,
+body.dark-mode .appointment-form textarea {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: #555;
+  color: #e0e0e0;
+}
+body.dark-mode .appointment-form input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.8);
+}
+
+.appointment-form input:focus,
+.appointment-form select:focus,
+.appointment-form textarea:focus {
+  outline: none;
+  border-color: #FF7F50;
+  box-shadow: 0 0 8px rgba(255, 127, 80, 0.3);
+}
+body.dark-mode .appointment-form input:focus,
+body.dark-mode .appointment-form select:focus,
+body.dark-mode .appointment-form textarea:focus {
+  border-color: #FF1493;
+  box-shadow: 0 0 8px rgba(255, 20, 147, 0.4);
+}
+
+.appointment-form .error-message {
+  display: block;
+  color: #e74c3c;
+  font-size: 0.8em;
+  margin-top: 5px;
+  min-height: 1em;
+}
+body.dark-mode .appointment-form .error-message {
+    color: #ff7675;
+}
+
+.appointment-form .submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #6A0DAD, #FF1493);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.5s ease;
+  text-align: center;
+  margin-top: 10px;
+  background-size: 200% auto;
+}
+.appointment-form .submit-button:hover {
+  background-position: right center; /* change the direction of the change here */
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  transform: translateY(-2px);
+}
+
+.form-feedback-message {
+    text-align: center;
+    padding: 12px 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+@media (max-width: 768px) {
+  .left-column {
+    /* Giữ lại các style mobile hiện có cho .left-column */
+    border-radius: 12px; /* Hoặc một giá trị khác nếu muốn cho mobile */
+    border-right: none;  /* Đảm bảo không có border-right từ desktop */
+  }
+}
+/* Các style .success, .error giữ nguyên */
+
+
+@media (max-width: 768px) {
+  .booking-page-wrapper {
+    padding: 70px 15px 30px 15px;
+  }
+  .booking-container-page {
+    padding: 20px;
+  }
+  .booking-container-page h1 {
+    font-size: 1.9em;
+  }
+  .form-group-half {
+    flex-direction: column;
+    gap: 0; /* Bỏ gap để margin-bottom của form-group xử lý */
+  }
+  .form-group-half > div {
+    margin-bottom: 22px; /* Thêm margin cho phần tử đầu tiên trong cặp half */
+  }
+   .form-group-half > div:last-child {
+    margin-bottom: 0; /* Bỏ margin cho phần tử cuối cùng trong cặp half nếu nó là cuối form-group */
+  }
+}
+/* Cập nhật style cho label của select bác sĩ/gói */
+.appointment-form label[for="selectDoctorService"] {
+  display: block;
+  margin-bottom: 10px; /* Tăng một chút margin bottom */
+  font-weight: 700;    /* Làm đậm hơn */
+  font-size: 1.05em;   /* Tăng kích thước chữ một chút */
+  color: #555;         /* Màu chữ rõ ràng hơn cho light mode */
+}
+
+body.dark-mode .appointment-form label[for="selectDoctorService"] {
+  color: #ccc; /* Màu chữ cho dark mode */
+}
+
+/* Trong BS.css */
+
+/* =================== GLOBAL CONTROLS (Đảm bảo đã có từ trước) =================== */
+.control-button {
+  position: fixed;
+  z-index: 1002;
+  background-color: rgba(0, 0, 0, 0.5); /* Hoặc màu bạn chọn */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px; /* Kích thước cơ bản, có thể bị settings-icon-button ghi đè */
+  height: 50px;
+  font-size: 1.2em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.control-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+body.dark-mode .control-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+body.dark-mode .control-button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Settings Menu (Đảm bảo đã có từ trước) */
+.settings-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1003;
+}
+.settings-icon-button { /* Ghi đè .control-button nếu cần */
+  /* Các thuộc tính hiện có như position, z-index, background-color, color, border, cursor, display, align-items, justify-content, box-shadow, transition */
+  width: 55px; 
+  height: 55px;
+  font-size: 1.5em;
+  border-radius: 50%;
+  padding: 0;
+  /* Kế thừa các style khác từ .control-button nếu có thể */
+  background-color: rgba(0, 0, 0, 0.5); /* Đảm bảo nó có style nền */
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+body.dark-mode .settings-icon-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+}
+/* ... (Toàn bộ các style cho .settings-icon-button i, .settings-options, .settings-option-button như đã cung cấp cho datlich.html) ... */
+
+/* Back Button (Đảm bảo đã có từ trước) */
+.back-button { 
+  bottom: 20px;
+  right: 20px;
+  padding-left: 12px;
+}
+.back-button span {
+  font-size: 0.6em;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+/* Trong file BS.css hoặc style.css */
+
+/* Style cho ảnh đại diện của gói dịch vụ */
+.left-column .service-package-avatar {
+  width: 160px;  /* Kích thước mong muốn cho ảnh tròn */
+  height: 160px; /* Phải bằng width để đảm bảo hình tròn */
+  border-radius: 50%; /* Đây là thuộc tính chính để tạo khung tròn */
+  object-fit: cover;  /* Đảm bảo ảnh lấp đầy khung tròn mà không bị méo, phần thừa sẽ bị cắt */
+  border: 4px solid #a777e3; /* Ví dụ: một màu viền tím nhạt, bạn có thể đổi màu */
+  box-shadow: 0 0 15px rgba(167, 119, 227, 0.5); /* Ví dụ: bóng đổ nhẹ */
+  margin-bottom: 20px; /* Khoảng cách với các phần tử bên dưới */
+  display: block; /* Để margin auto hoạt động nếu bạn muốn căn giữa nó */
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.left-column .service-package-avatar:hover {
+  transform: scale(1.07); /* Phóng to nhẹ khi hover */
+  box-shadow: 0 0 25px rgba(167, 119, 227, 0.7);
+}
+
+/* Điều chỉnh cho màn hình nhỏ nếu cần */
+@media (max-width: 768px) {
+  .left-column .service-package-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+  }
+}
+
+.left-column img#serviceImage {
+  width: 80%; /* Hoặc kích thước bạn muốn, ví dụ 250px */
+  max-width: 280px; /* Giới hạn kích thước tối đa */
+  height: auto; /* Để giữ tỷ lệ khung hình của ảnh gốc */
+  border-radius: 12px; /* Bạn có thể điều chỉnh giá trị này (ví dụ: 10px, 15px) */
+  overflow: hidden; 
+
+  border-radius: 15px; /* Bo tròn các góc. Để tròn hoàn toàn, dùng 50% (nhưng ảnh cần vuông) */
+  
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: block; /* Giúp margin auto hoạt động nếu muốn căn giữa */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+

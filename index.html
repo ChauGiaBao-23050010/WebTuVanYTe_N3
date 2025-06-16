@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/s4f0cb7e4a.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+  <div class="video-container">
+    <video src="https://cdn.pixabay.com/video/2020/09/13/49815-458438877_large.mp4" autoplay muted loop onclick="showAd()"></video>
+  </div>
+  <!-- Cửa sổ quảng cáo -->
+  <div class="ad-popup" id="ad-popup">
+    <button class="close-btn" onclick="closeAdPopup()">X</button>
+    
+    <h2 data-i18n="ad_popup_title"></h2> 
+    <p data-i18n="ad_popup_desc"></p>
+    
+    <a href="datlich.html"><button data-i18n="book_tour"></button></a> 
+  </div>
+  
+  <!---Icon AD-->
+  <div class="ad-icon" id="adIcon">
+    <span class="ad-close" id="closeAdIcon">×</span>
+    <img src="Hinh/ad.png" alt="Quảng Cáo">
+  </div>
+<!-- Trượt -->
+  <button id="scroll-to-top" title="Go to top"></button>
+
+
+<!-- Nút Kích hoạt Chatbox AI Chẩn Đoán Bệnh -->
+<button class="symptom-checker-toggler" id="symptomCheckerToggler" aria-label="Mở AI Chẩn Đoán Bệnh" data-i18n-aria="symptomCheckerTogglerAriaLabel">
+    <i class="fas fa-user-md"></i> <!-- Icon bác sĩ hoặc icon AI khác -->
+    <span class="symptom-checker-tooltip" data-i18n="symptomCheckerTooltip">AI Chẩn Đoán</span>
+</button>
+
+<!-- Khung Chatbox AI Chẩn Đoán Bệnh -->
+<div class="symptom-checker-widget" id="symptomCheckerWidget">
+    <div class="symptom-checker-header">
+        <h2 id="symptomCheckerTitle" data-i18n="symptom_checker_title">AI Chẩn Đoán Bệnh</h2>
+        <button class="symptom-checker-close-btn" id="closeSymptomCheckerBtn" aria-label="Đóng" data-i18n-aria="closeButtonAriaLabel">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="symptom-checker-content">
+        <div id="symptomCheckerProgress" class="symptom-checker-progress-bar">
+            <div id="symptomCheckerProgressBarFill"></div>
+        </div>
+        <p id="symptomCheckerQuestionText" data-i18n="symptom_checker_initial_question">Hãy mô tả triệu chứng chính của bạn...</p>
+        
+        <div id="symptomCheckerOptionsContainer" class="symptom-checker-options">
+            <!-- Các nút tùy chọn sẽ được thêm bằng JavaScript -->
+        </div>
+
+        <div id="symptomCheckerResultContainer" class="symptom-checker-result" style="display: none;">
+            <h3 id="symptomCheckerGuess" data-i18n="symptom_checker_i_guess">Dự đoán: <span id="symptomCheckerPredictedDisease"></span></h3>
+            <p data-i18n="symptom_checker_is_it_correct">Thông tin này có vẻ phù hợp với bạn không?</p>
+            <button class="symptom-checker-option-btn" id="symptomCheckerGuessYes" data-i18n="yes">Phù hợp</button>
+            <button class="symptom-checker-option-btn" id="symptomCheckerGuessNo" data-i18n="no">Chưa chắc / Không đúng</button>
+            <div id="symptomCheckerResultFeedback" class="symptom-checker-result-feedback-text" style="display: none;"></div>
+        </div>
+
+        <button id="symptomCheckerBackButton" class="symptom-checker-back-btn" style="display: none;" data-i18n="back_button">Câu trước</button>
+    </div>
+    <div class="symptom-checker-footer">
+        <p class="disclaimer" data-i18n="symptom_checker_disclaimer">Lưu ý: Công cụ này chỉ đưa ra gợi ý dựa trên thông tin hạn chế, không thay thế chẩn đoán y tế chuyên nghiệp. Luôn tham khảo ý kiến bác sĩ.</p>
+    </div>
+</div>
+
+
+
+<!---------TKKKKKKKKKKKK-->
+<div class="search-toggle-icon" id="searchToggle">
+  <i class="fas fa-search"></i>
+</div>
+
+<div class="search-container minimized" id="searchContainer">
+  <input type="text" id="searchInput" placeholder="Search" oninput="searchFunction()">
+  <ul id="searchResults"></ul>
+</div>
+
+
+
+<!-- Modal to view image in full size -->
+<div id="imageModal" class="modal" onclick="closeModal()">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<!--Đầu-->
+<header>
+  <div class="header-top">
+    <i class="fa-solid fa-bars"></i>
+    <ul>
+      <img src="Hinh/logo.jpg" alt="Logo" class="logo" onclick="location.reload()">
+      <li style="--x:1;"><a href="#nice-place" data-i18n="highlighted_places">Địa điểm nổi bật</a></li>
+      <li style="--x:2;"><a href="#about" data-i18n="about_us">Về chúng tôi</a></li>
+      <li style="--x:3;"><a href="#tour" data-i18n="tour">Tour</a></li>
+      <li style="--x:4;"><a href="#review" data-i18n="feedback">Phản hồi</a></li>
+
+      <!-- Thay thế li liên hệ bằng li chứa settings-container -->
+      <li style="--x:5;">
+        <div class="settings-container">
+          <div class="settings-icon">
+            <img src="Hinh/setting.jpg" alt="Cài đặt" />
+          </div>
+          <div class="settings-options">
+            <button id="toggle-language" class="settings-button">
+              <img id="language-icon" src="Hinh/vn.jpg" alt="Lang Icon" />
+              <span id="language-text">Tiếng Việt</span>
+            </button>
+            <button id="toggle-theme" class="settings-button">
+              <img id="theme-icon" src="Hinh/mattrang.jpg" alt="Theme Icon" />
+              <span id="theme-text" data-i18n="dark_mode">Chế Độ Tối</span>
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>    
+  </div>
+</header>
+
+
+
+<!--Bác sĩ nổi bật-->
+<section id="nice-place" class="nice-place">
+  <div class="container">
+    <h1 class="section-title" data-i18n="highlighted_places">Bác Sĩ Nổi Bật</h1>
+    <div class="nice-place-content row">
+      <div class="nice-place-item fade-in">
+        <div class="nice-place-img">
+          <a href="BS1.html"><img src="Hinh/bs1.png" alt="bs1"></a>
+        </div>
+        <div class="nice-place-text">
+            <h2 data-i18n="doctor_tam">Bác Sĩ. Nguyễn Văn Tâm</h2>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <p data-i18n="halong_desc"></p>
+          <a href="datlich.html"><button data-i18n="book_tour"></button></a>
+        </div>
+      </div>
+
+      <div class="nice-place-item fade-in">
+        <div class="nice-place-img">
+          <a href="BS2.html"><img src="Hinh/bs2.png" alt="bs2"></a>
+        </div>
+        <div class="nice-place-text">
+          <h2 data-i18n="doctor_xuan">Bác Sĩ. Trần Thị Xuân</h2>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <p data-i18n="hue_desc"></p>
+          <a href="datlich.html"><button data-i18n="book_tour">Đặt Tour</button></a>
+        </div>
+      </div>
+
+      <div class="nice-place-item fade-in">
+        <div class="nice-place-img">
+          <a href="BS3.html"><img src="Hinh/bs3.png" alt="bs3"></a>
+        </div>
+        <div class="nice-place-text">
+          <h2 data-i18n="doctor_lieu">Bác Sĩ. Lê Văn Liễu</h2>
+          <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          <p data-i18n="phongnha_desc"></p>
+          <a href="datlich.html"><button data-i18n="book_tour">Đặt Tour</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  
+  <!--------------Về chúng tôi------------------------->
+  <section id="about" class="about">
+    <div class="container">
+      <h1 class="fade-in" data-i18n="about_title">Thông tin về chúng tôi</h1>
+      <div class="about-centent-row">
+        <div class="about-centent-left fade-in">
+          <img src="a.jpg" alt="">
+        </div>
+        <div class="about-centent-right fade-in">
+          <h2 data-i18n="why_choose_us"></h2>
+          <p data-i18n="about_desc">
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="service row">
+      <div class="service-item fade-in">
+        <img src="Hinh/1.jpeg" alt="Biểu tượng đặt tour">
+      </div>
+      <div class="service-item fade-in">
+        <img src="Hinh/3.jpg" alt="Biểu tượng dịch vụ 24/7">
+      </div>
+      <div class="service-item fade-in">
+        <img src="Hinh/2.jpg" alt="Biểu tượng sách hướng dẫn">
+      </div>
+    </div>
+  </section>
+  
+  
+      <!-- Tour ----------------------------- -->
+      <section id="tour" class="tour">
+        <div class="container">
+            <h1 class="tour-title fade-in" data-i18n="tour_title">Tư vấn</h1>
+            <div class="tour-content row">
+    
+                <!-- Tour 1 -->
+                <div class="tour-content-item row fade-in">
+                    <div class="tour-content-item-img">
+                        <img src="Hinh/bs1.png" alt="bs1" onclick="openModal('Hinh/bs1.png')">
+                    </div>
+                    <div class="tour-content-item-text">
+                        <h2 data-i18n="doctor_tam">Bác Sĩ. Nguyễn Văn Tâm</h2>
+                        <p data-i18n="halong_desc"></p>
+                        <a href="BS1.html"><button class="btn" data-i18n="learn_more">Tìm Hiểu</button></a>
+                    </div>
+                </div>
+    
+                <!-- Tour 2 -->
+                <div class="tour-content-item row fade-in">
+                    <div class="tour-content-item-img">
+                        <img src="Hinh/bs2.png" alt="Hue" onclick="openModal('Hinh/bs2.png')">
+                    </div>
+                    <div class="tour-content-item-text">
+                        <h2 data-i18n="doctor_xuan">Bác Sĩ. Trần Thị Xuân</h2>
+                        <p data-i18n="hue_desc"></p>
+                        <a href="BS2.html"><button class="btn" data-i18n="learn_more">Tìm Hiểu</button></a>
+                    </div>
+                </div>
+    
+                <!-- Tour 3 -->
+                <div class="tour-content-item row fade-in">
+                    <div class="tour-content-item-img">
+                        <img src="Hinh/bs3.png" alt="Phong Nha" onclick="openModal('Hinh/bs3.png')">
+                    </div>
+                    <div class="tour-content-item-text">
+                        <h2 data-i18n="doctor_lieu">Bác Sĩ. Lê Văn Liễu</h2>
+                        <p data-i18n="phongnha_desc"></p>
+                        <a href="BS3.html"><button class="btn" data-i18n="learn_more">Tìm Hiểu</button></a>
+                    </div>
+                </div>
+    
+                <!-- Tour 4 -->
+                <div class="tour-content-item row fade-in">
+                    <div class="tour-content-item-img">
+                        <img src="Hinh/goi.jpg" alt="Sa Pa" onclick="openModal('Hinh/goi.jpg')">
+                    </div>
+                    <div class="tour-content-item-text">
+                        <h2 data-i18n="goi"></h2>
+                        <p data-i18n="sapa_desc"></p>
+                        <a href="goi.html"><button class="btn" data-i18n="learn_more">Tìm Hiểu</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+      <!----------------Review------------------>
+      <section id="review" class="review">
+        <div class="container">
+          <!-- Tiêu đề này vẫn có thể dùng data-i18n nếu bạn muốn dịch "Bệnh nhân Nói về Chúng tôi" -->
+          <h1 class="section-title fade-in" data-i18n="feedback">Phản hồi</h1> 
+      
+          <div class="carousel-container">
+            <div class="carousel" id="reviewCarousel">
+              <!-- Review 1 (Tiếng Việt) -->
+              <div class="carousel-slide fade-in">
+                <div class="review-item-text">
+                  <img src="Hinh/logo.jpg" alt="Dấu ngoặc kép">
+                  <p><span>“</span>Tôi thực sự ấn tượng với sự tận tâm và chuyên nghiệp của đội ngũ y bác sĩ tại đây. Quá trình thăm khám và điều trị diễn ra rất nhẹ nhàng, và tôi đã nhận được những lời khuyên sức khỏe vô cùng hữu ích. Cảm ơn phòng khám rất nhiều!<span>”</span></p>
+                </div>
+                <div class="review-item-img row">
+                  <img src="Hinh/a2.jpg" alt="Bệnh nhân 1"> <!-- Thay ảnh phù hợp -->
+                  <div class="review-item-img-text">
+                    <h2>Nguyễn Thị Lan</h2>
+                    <p>Khám ngày: 15/05/2024</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Review 2 (Tiếng Việt) -->
+              <div class="carousel-slide fade-in">
+                <div class="review-item-text">
+                  <img src="Hinh/logo.jpg" alt="Dấu ngoặc kép">
+                  <p><span>“</span>Dịch vụ rất tốt, từ khâu đặt lịch hẹn đến khi gặp bác sĩ. Cơ sở vật chất sạch sẽ, hiện đại. Bác sĩ tư vấn rất kỹ càng và giải đáp mọi thắc mắc của tôi một cách rõ ràng. Tôi chắc chắn sẽ quay lại và giới thiệu cho bạn bè, người thân.<span>”</span></p>
+                </div>
+                <div class="review-item-img row">
+                  <img src="Hinh/a1.jpg" alt="Bệnh nhân 2"> <!-- Thay ảnh phù hợp -->
+                  <div class="review-item-img-text">
+                    <h2>Trần Văn Minh</h2>
+                    <p>Điều trị ngày: 02/06/2024</p>
+                  </div>
+                </div>
+              </div>
+      
+              <!-- Review 3 (Tiếng Anh) -->
+              <div class="carousel-slide fade-in">
+                <div class="review-item-text">
+                  <img src="Hinh/logo.jpg" alt="Quotation marks">
+                  <p><span>“</span>The level of care and attention to detail I received was exceptional. The doctors are not only highly skilled but also very compassionate. I felt very comfortable and well-informed throughout my entire visit. Highly recommend this clinic!<span>”</span></p>
+                </div>
+                <div class="review-item-img row">
+                  <img src="Hinh/a3.jpg" alt="Patient 3"> <!-- Thay ảnh phù hợp -->
+                  <div class="review-item-img-text">
+                    <h2>Emily Johnson</h2>
+                    <p>Consultation Date: June 10, 2024</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Nút điều hướng -->
+            <button class="prev" onclick="prevSlide()">❮</button>
+            <button class="next" onclick="nextSlide()">❯</button>
+          </div>
+        </div>
+      </section>
+      
+
+
+  <script src="JVS/script.js"></script>
+  <script>
+    document.querySelector('.fa-bars').addEventListener('click', () => {
+      document.querySelector('.header-top ul').classList.toggle('active');
+    });
+  </script>
+<footer class="footer-contact">
+  <div class="footer-container">
+    <!-- Cột: Thông tin liên hệ -->
+    <div class="footer-column">
+      <h3>Liên hệ</h3>
+      <ul class="contact">
+        <li class="icon">
+          <img src="Hinh/phone.jpg" alt="Phone" />
+          <span class="tooltip">☎️ 0325992413</span>
+        </li>
+        <li class="icon">
+          <img src="Hinh/email.jpg" alt="Email" />
+          <span class="tooltip">CTYTRAVELDEBAO@gmail.vn</span>
+        </li>
+        <li class="icon">
+          <img src="Hinh/zalo.png" alt="Zalo" />
+          <span class="tooltip"><a href="https://chat.zalo.me/Bảo" target="_blank">Zalo</a></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cột: Mạng xã hội -->
+    <div class="footer-column">
+      <h3>Mạng xã hội</h3>
+      <ul class="contact">
+        <li class="icon">
+          <img src="Hinh/fb.jpg" alt="Facebook" />
+          <span class="tooltip"><a href="https://facebook.com/Congty" target="_blank">Facebook</a></span>
+        </li>
+        <li class="icon">
+          <img src="Hinh/link.png" alt="LinkedIn" />
+          <span class="tooltip"><a href="https://linkedin.com/in/Congty/" target="_blank">LinkedIn</a></span>
+        </li>
+        <li class="icon">
+          <img src="Hinh/app.png" alt="WhatsApp" />
+          <span class="tooltip"><a href="https://wa.me/0325992413" target="_blank">WhatsApp</a></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Cột: Thông tin thêm -->
+    <div class="footer-column">
+      <h3 data-i18n="other_info_title"></h3>
+      <p data-i18n="headquarters_address"></p>
+      <p data-i18n="support_hours"></p>
+      <p data-i18n="contact_email"></p>
+    </div>
+  </div>
+</footer>
+
+
+
+</body>
+</html>

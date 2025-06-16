@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="pageTitleBS2">Thông Tin BS. Trần Thị Xuân</title> <!-- Thêm data-i18n -->
+    <link rel="stylesheet" href="CSS/BS.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> --><!-- Bỏ comment nếu dùng -->
+  </head>
+  <body>
+
+    <!-- Settings Menu (MỚI) -->
+    <div class="settings-container" id="settingsContainer">
+      <button class="settings-icon-button" id="settingsButton" aria-label="Cài đặt" data-i18n-aria="settingsAriaLabel">
+        <i class="fas fa-cog"></i>
+      </button>
+      <div class="settings-options" id="settingsOptions">
+        <button class="settings-option-button" id="toggleThemeOption">
+          <i class="fas fa-sun" id="settingsThemeIcon"></i> <span data-i18n="settingsChangeTheme">Đổi Theme</span>
+        </button>
+        <button class="settings-option-button" id="toggleLanguageOption">
+          <i class="fas fa-language"></i> <span data-i18n="settingsChangeLanguage">Đổi Ngôn ngữ</span>
+        </button>
+        </a>
+      </div>
+    </div>
+
+    <!-- LOẠI BỎ .language-switcher và .theme-switcher cũ -->
+
+    <div class="container">
+      <div class="left-column">
+        <img src="Hinh/bs2.png" alt="Ảnh đại diện" class="fade-in" />
+        <h2 id="name" class="fade-in" data-i18n="name"></h2> <!-- Thêm data-i18n -->
+        <p class="jt job-title fade-in" id="jt" data-i18n="jt"></p> <!-- Thêm data-i18n -->
+        <!-- Sửa href để truyền serviceId cho bác sĩ này -->
+        <a href="datlich.html?serviceId=bs_xuan" class="nut-dat-lich fade-in" data-i18n="bookAppointmentButton">Đặt lịch</a> <!-- Thêm data-i18n -->
+
+        <ul class="contact fade-in">
+          <li class="icon">
+            <img src="Hinh/phone.jpg" alt="Phone" />
+            <span class="tooltip">☎️ +84 0325871423</span>
+          </li>
+          <li class="icon">
+            <img src="Hinh/email.jpg" alt="Email" />
+            <span class="tooltip">tranthixuan@gmail.com</span>
+          </li>
+          <li class="icon">
+            <img src="Hinh/fb.jpg" alt="Facebook" />
+            <span class="tooltip">🌐 <a href="https://www.facebook.com/Tâm" target="_blank">BS.TranThiXuan</a></span>
+          </li>
+          <li class="icon">
+            <img src="Hinh/zalo.png" alt="Zalo" />
+            <span class="tooltip">💬 <a href="https://chat.zalo.me/Tâm" target="_blank">BS.TranThiXuan</a></span>
+          </li>
+          <li class="icon">
+            <img src="Hinh/app.png" alt="WhatsApp" />
+            <span class="tooltip">💬 <a href="https://wa.me/0325878235" target="_blank">Dr.TranThiXuan</a></span>
+          </li>
+          <li class="icon">
+            <img src="Hinh/link.png" alt="LinkedIn" />
+            <span class="tooltip">🔗 <a href="https://www.linkedin.com/in/Tâm/" target="_blank">Dr.TranThiXuan</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="right-column">
+        <section class="section-link fade-in" onclick="toggleSection('gioithieu')">
+          <h2 id="gt" class="fade-in" data-i18n="gt">Giới Thiệu</h2>
+          <p id="gt1" class="fade-in" data-i18n="gt1"></p>
+          <div class="detail fade-in" id="gioithieu">
+            <p id="gt2" class="fade-in" data-i18n="gt2"></p>
+            <p id="gt3" class="fade-in" data-i18n="gt3"></p>
+            <!-- <a id="al" class="fade-in"></a> -->
+          </div>
+        </section>
+
+        <section class="section-link fade-in" onclick="toggleSection('kynang')">
+          <h2 id="kn" class="fade-in" data-i18n="kn">Kỹ Năng</h2>
+          <p id="kn1" class="fade-in" data-i18n="kn1"></p>
+          <div class="detail fade-in" id="kynang">
+            <ul id="kn2" class="fade-in" data-i18n="kn2"></ul>
+            <!-- <a id="skills-link" class="fade-in"></a> -->
+          </div>
+        </section>
+
+        <section class="section-link fade-in" onclick="toggleSection('kinhnghiem')">
+          <h2 id="kng" class="fade-in" data-i18n="kng">Kinh Nghiệm</h2>
+          <p id="kng1" class="fade-in" data-i18n="kng1"></p>
+          <div class="detail fade-in" id="kinhnghiem">
+            <p id="kng2" class="fade-in" data-i18n="kng2"></p>
+            <p id="kng3" class="fade-in" data-i18n="kng3"></p>
+            <!-- <a id="experience-link" class="fade-in"></a> -->
+          </div>
+        </section>
+
+        <section class="section-link fade-in" onclick="toggleSection('duan')">
+          <h2 id="da" class="fade-in" data-i18n="da">Thành Tựu</h2>
+          <p id="da1" class="fade-in" data-i18n="da1"></p>
+          <div class="detail fade-in" id="duan">
+            <p id="da2" class="fade-in" data-i18n="da2"></p>
+            <p id="da3" class="fade-in" data-i18n="da3"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <button id="backButton" class="control-button back-button" title="Quay lại trang trước"> <!-- Thêm class control-button -->
+        <i class="fas fa-arrow-left"></i> <span data-i18n="backButtonText">Quay lại</span>
+    </button>
+
+    <script defer src="JVS/BS2.js"></script>
+
+  </body>
+</html>
+

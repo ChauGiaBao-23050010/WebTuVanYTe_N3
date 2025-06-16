@@ -1,0 +1,2030 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+:root {
+  --main-color: #6DBFE2;
+  --subtex: 'Open Sans', sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+
+#scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 40px;  /* Đặt kích thước cho hình vuông */
+  height: 40px; /* Đặt kích thước cho hình vuông */
+  background-color: transparent; /* Nền trong suốt */
+  border: 2px solid red; /* Viền màu đen */
+  display: none; /* Ẩn nút cho đến khi cuộn xuống */
+  z-index: 1000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center; /* Canh giữa nội dung */
+}
+
+#scroll-to-top:focus {
+  outline: none; /* Tắt outline khi focus */
+}
+
+/* Tạo hình tam giác hướng lên */
+#scroll-to-top::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid Red; /* Tam giác đen hướng lên */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Canh giữa tam giác trong nút */
+}
+
+/* Hiệu ứng khi hover */
+#scroll-to-top:hover {
+  border-color: #444; /* Màu viền khi hover */
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ✅ Cho mobile: video không bị cắt và giữ tỷ lệ chuẩn */
+@media (max-width: 768px) {
+  .video-container {
+    height: auto;
+  }
+
+  .video-container video {
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain; /* giữ toàn bộ video không bị cắt */
+  }
+}
+
+header {
+  position: relative;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+  z-index: 999;
+}
+.header-top .logo {
+  width: 70px;              /* Tăng kích thước */
+  height: 70px;
+  border-radius: 50%;       /* Bo tròn logo */
+  object-fit: cover;        /* Cắt hình vuông về đúng vùng hình tròn */
+  overflow: hidden;         /* Ẩn phần dư thừa */
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+
+.header-top i {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 35px;
+  color: var(--main-color);
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Mobile mặc định */
+.header-top ul {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Căn giữa */
+  width: 90vw;
+  height: auto;
+  max-height: 80vh;
+  padding: 40px 20px;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  background: linear-gradient(to right, rgba(255, 105, 180, 0.85), rgba(153, 50, 204, 0.85));
+  z-index: 15;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  text-align: center;
+  overflow-y: auto;
+}
+
+
+.header-top ul.active {
+  display: flex;
+  opacity: 1;
+}
+
+.header-top ul li {
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.header-top ul li a {
+  color: var(--main-color); /* màu chữ đen */
+  text-decoration: none;
+  font-size: 22px; /* kích thước chữ lớn hơn */
+  font-weight: 600;
+  padding: 12px 15px;
+  display: inline-block;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+}
+
+.header-top ul li a:hover {
+  color: tomato;
+  background-color: rgba(255, 255, 255, 0.2); /* nền hơi sáng khi hover */
+}
+
+
+/* PC */
+@media (min-width: 768px) {
+  .header-top {
+    justify-content: center;
+    position: fixed; /* Đổi từ sticky sang fixed để đảm bảo thanh menu luôn nằm ở trên cùng */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Đảm bảo thanh menu không bị che khuất */
+    background-color: rgba(0, 0, 0, 0.8); /* Thêm nền đen mờ nếu cần */
+  }
+
+  .header-top i {
+    display: none; /* Ẩn icon menu trên PC */
+  }
+
+  .header-top ul {
+    all: unset;
+    display: flex !important;
+    gap: 40px;
+    align-items: center;
+    position: static;
+    background: none;
+    opacity: 1;
+    flex-direction: row;
+  }
+
+  .header-top ul li {
+    margin: 0;
+  }
+
+  .header-top ul li a {
+    color: var(--main-color);
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 15px;
+  }
+
+  .header-top ul li a:hover {
+    color: tomato;
+  }
+}
+
+/* Icon toggle */
+.search-toggle-icon {
+  position: absolute; /* Sử dụng absolute để có thể di chuyển */
+  top: 140px;
+  left: 20px;
+  background: rgb(9, 247, 247);
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.search-toggle-icon:hover {
+  background: darkcyan;
+}
+
+/* Search container thu gọn/mở rộng */
+.search-container {
+  position: absolute; /* Sử dụng absolute để dễ dàng thay đổi vị trí */
+  top: 10px;
+  left: 10px;
+  width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.8);
+  transform-origin: left center;
+  transition: all 0.4s ease;
+  z-index: 9;
+}
+
+.search-container.active {
+  width: 50%;
+  max-width: 600px;
+  min-width: 280px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#searchResults a span {
+  background: linear-gradient(90deg, #ff69b4, #800080);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: colorChange 3s linear infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .search-toggle-icon {
+    top: 20px !important;
+    left: 15px !important;
+  }
+
+  .search-container {
+    top: 20px !important;
+    left: 60px !important;
+    width: 70% !important;
+  }
+}
+
+
+#searchResults li img {
+  width: 50px;   /* Giảm từ 50px xuống 30px */
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+/* Đảm bảo rằng cả icon và thanh tìm kiếm có thể di chuyển */
+#searchToggle {
+  top: 100px;             /* khoảng cách từ trên */
+  left: 50%;              /* đặt vị trí ngang giữa */
+  transform: translateX(-50%); /* dịch sang trái 50% chiều rộng icon để căn giữa chính xác */
+  cursor: move;
+}
+
+
+/* Cài đặt vị trí cho icon và thanh tìm kiếm */
+#searchToggle {
+  top: 150px;  /* Vị trí ban đầu của icon */
+  left: 500px; /* Vị trí ban đầu của icon */
+  cursor: move; /* Đảm bảo người dùng biết có thể kéo icon */
+}
+
+#searchContainer {
+  display: none; /* Ẩn thanh tìm kiếm mặc định */
+  top: 140px;  /* Vị trí thanh tìm kiếm */
+  left: 530px; /* Vị trí của thanh tìm kiếm, cách icon 30px */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Để thanh tìm kiếm có độ đổ bóng */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+#searchContainer.active {
+  display: block; /* Hiển thị thanh tìm kiếm khi được active */
+}
+
+/*  query cho mobile */
+@media (max-width: 767px) {
+  #searchToggle, #searchContainer {
+    top: 150px;  /* Vị trí icon và thanh tìm kiếm khi trên màn hình nhỏ */
+    left: 20px; /* Vị trí trái sẽ nhỏ lại để phù hợp với không gian di động */
+  }
+
+  #searchContainer {
+    left: 60px; /* Đảm bảo thanh tìm kiếm cách icon 30px */
+  }
+}
+
+
+/**/
+
+
+
+
+
+.header-content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%); /* Căn giữa theo trục ngang */
+  min-height: 100vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 150px 50px 0 50px;
+  text-align: center;
+  width: 400px;
+}
+
+.header-content> h1 {
+    color: var(--main-color);
+}
+.header-content> p {
+    color: var(--main-color); 
+}
+form{
+    padding: 30px 12px;
+    background-color: #fff;
+    margin: 30px;
+}
+form h1 {
+    color: #333;
+    font-size: 27px;
+}
+form select,input {
+    width: 100%;
+    height: 35px;
+    padding-left: 12px;
+    outline: none;
+    background-color: #dddd;
+    border: none;
+}
+form p {
+    text-align: left;
+    color: var(--main-color);
+    margin: 8px 0 3px;
+}
+form button {
+    height: 35px;
+    width: 150px;
+    background-color: var(--main-color);
+    color: #fff;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all .3s ease;
+}
+form button:hover {
+    background-color: transparent;
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+/*--------------------- Canh Dep----------------------------*/
+.nice-place {
+    padding: 100px 0;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.container {
+    max-width: 1024px;
+    margin: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+.nice-place-item {
+    width: 30%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+}
+.nice-place-item:hover .nice-place-text {
+    transform: translateX(0%);
+}
+.nice-place-item img {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .nice-place-img img {
+    object-fit: contain;
+    max-height: 50vh;
+    display: block;
+    margin: 0 auto; /* Căn giữa theo chiều ngang */
+  }
+}
+
+.nice-place-text {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 0;
+    padding: 12px;
+    background: linear-gradient(to left, rgba(0,0,0,0.8), rgba(255,255,255,0));
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+}
+.nice-place h2 {
+    color: var(--main-color);
+}
+.nice-place i {
+    color: yellow;
+}
+.nice-place p {
+    color: #fff;
+    margin: 12px 0;
+}
+.nice-place button {
+    height: 30px;
+    width: 100px;
+    background-color: var(--main-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.5 ease;
+}
+.nice-place button:hover {
+    background-color: tomato;
+}
+.nice-place h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--main-color);
+    position: relative;
+}
+.nice-place h1 ::before {
+    position: absolute;
+    content: "";
+    height: 5px;
+    width: 150px;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.nice-place h1 ::after {
+    position: absolute;
+    content: "\2665";
+    width: 40px;
+    height: 20px;
+    color: red;
+    background-color: #fff;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+} 
+.section-title {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    color: var(--main-color);
+    margin-bottom: 50px;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.section-title::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    width: 150px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+ .section-title::after {
+    content: "♥";
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: red;
+    background-color: #fff;
+    padding: 0 6px;
+    .about {
+        padding: 100px 0;
+}
+}
+.about h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--main-color);
+    position: relative;
+    font-size: 32px;
+}
+.about h1::before {
+    position: absolute;
+    content: "";
+    height: 5px;
+    width: 150px;
+    background-color: var(--main-color);
+    border-radius: 5px;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.about h1::after {
+    position: absolute;
+    content: "♥";
+    font-size: 20px;
+    color: red;
+    background-color: #fff;
+    padding: 0 6px;
+    bottom: -18px;
+    left: 50%;
+        transform: translateX(-50%);
+}
+
+.about-centent-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+.about-centent-left {
+    width: 48%;
+}
+.about-centent-left img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.about-centent-right {
+    padding-left: 20px;
+}
+.about-centent-right h2 {
+    font-weight: normal;
+    color: var(--main-color);
+}
+    
+.about-centent-right p {
+    font-size: 18px;
+    margin: 20px 0;
+}
+.about-centent-right button {
+    height: 30px;
+    width: 120px;
+    background-color: var(--main-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.about-centent-right button:hover {
+    background-color: tomato;
+}
+
+.service-item {
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+    background-color: #b6dcec;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .service-item:hover {
+    box-shadow: 2px 2px 10px black;
+  }
+  
+  .service-item img {
+    width: 150px;
+    margin-bottom: 6px;
+  }
+  
+  /* Hiệu ứng đổi màu */
+  @keyframes colorChange {
+    0%   { color: #e74c3c; }   /* đỏ */
+    25%  { color: #f39c12; }   /* cam */
+    50%  { color: #27ae60; }   /* xanh lá */
+    75%  { color: #2980b9; }   /* xanh dương */
+    100% { color: #8e44ad; }   /* tím */
+  }
+  
+  .tour {
+    padding: 100px 0;
+  }
+  
+.tour-content-item-img {
+  position: relative;
+  z-index: 1;
+  width: 50%;
+  height: 320px;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 8px; /* thêm padding để ảnh nhỏ lại */
+  box-sizing: border-box; /* để padding không làm tăng kích thước ngoài */
+}
+
+.tour-content-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* hoặc cover nếu muốn */
+  object-position: center center; /* hoặc center 0% */
+  position: relative;
+  z-index: 1;
+}
+
+
+
+
+  .tour-content-item-text {
+    width: 50%;
+    padding: 20px 0 0 50px;
+  }
+  
+  .tour-content-item-text h2 {
+    font-family: var(--subtext);
+    font-weight: normal;
+    color: var(--main-color);
+  }
+  
+  .tour-content-item-text p {
+    font-size: 18px;
+    margin: 20px 0;
+    font-family: var(--subtext);
+  }
+  
+  .tour-content-item {
+    display: flex; /* THÊM VÀO để chia đôi ảnh và text */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 12px;
+  }
+  
+  .tour-content-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  .btn {
+    height: 35px;
+    width: 130px;
+    background-color: var(--main-color);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-family: var(--subtext); /* nếu bạn có định nghĩa */
+  }
+  
+  .btn:hover {
+    background-color: tomato;
+  }
+  
+  /* Review */
+  /* --- Review --- */
+
+/* Giữ nguyên màu chữ trong phần review */
+.review {
+  padding: 100px 0;
+  color: black; /* Giữ màu chữ là đen cho chế độ sáng */
+}
+
+/* Review item vẫn giữ hiệu ứng bóng, padding, và kích thước */
+.review-item {
+  width: 30%;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px 12px;
+  background-color: white;  /* Giữ màu nền sáng cho phần review-item */
+  color: black; /* Đảm bảo chữ vẫn màu đen khi chế độ sáng */
+}
+
+/* Phần text trong review */
+.review-item-text {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #dddd;
+  color: black;  /* Đảm bảo chữ không thay đổi màu */
+}
+
+.review-item-text p {
+  font-size: 16px;
+  margin: 20px 0;
+  font-family: var(--subtext);
+}
+
+.review-item-text span {
+  color: var(--main-color);
+}
+
+.review-item-text img {
+  width: 50px;
+}
+
+/* Container chứa ảnh và thông tin người review */
+.review-item-img {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+}
+
+/* Ảnh người review */
+.review-item-img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0; /* Giữ kích thước ảnh không bị co lại */
+}
+
+/* Container chứa tên và mô tả người review */
+.review-item-img-text {
+  flex: 1 1 70%; /* Chiếm 70% không gian nhưng vẫn linh hoạt */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Tên người review */
+.review-item-img-text h2 {
+  font-family: var(--subtext);
+  font-size: 16px;
+  color: var(--main-color);
+  margin: 0 0 4px 0; /* Giảm margin dưới cho sát hơn */
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Mô tả hoặc chức danh người review */
+.review-item-img-text p {
+  font-family: var(--subtext);
+  font-size: 14px;
+  color: #333;
+  margin: 0; /* Reset margin cho sạch */
+  line-height: 1.3;
+  word-break: break-word; /* Tránh tràn chữ */
+}
+
+
+/* Hiệu ứng hover giữ nguyên */
+.review .carousel-container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7); /* Bóng mạnh hơn khi hover */
+  transform: scale(1.02); /* Tăng nhẹ kích thước khi hover */
+  transition: all 0.3s ease; /* Hiệu ứng mượt mà khi hover */
+}
+
+/* Đảm bảo khi chuyển chế độ sáng, chữ vẫn giữ màu đen trong phần review */
+.container.light-mode .review-item {
+  background-color: #f9f9f9; /* Chế độ sáng, bạn có thể tùy chỉnh */
+  color: black;  /* Đảm bảo chữ đen khi sáng */
+}
+
+.container.light-mode .review-item-text {
+  color: black; /* Giữ màu chữ đen khi sáng */
+}
+
+.container.dark-mode .review-item {
+  background-color: #333;  /* Màu nền của item trong chế độ tối */
+  color: white;  /* Chữ sáng trong chế độ tối */
+}
+
+.container.dark-mode .review-item-text {
+  color: white;  /* Chữ sáng trong chế độ tối */
+}
+
+.container.dark-mode .review-item-text p {
+  color: white;  /* Chữ sáng trong chế độ tối */
+}
+
+  /* ------------------------------lIÊN hệ----------------------*/
+
+  
+  .contact {
+    padding: 50px 0;
+  }
+  
+  .contact-content-item {
+    width: 50%;
+    padding: 6px 12px;
+  }
+  
+  
+  .contact-content-top input {
+    height: 35px;
+    width: 100%;
+    margin-bottom: 3px;
+  }
+  
+  .contact-content-bottom {
+    padding: 6px 12px;
+    text-align: center;
+  }
+  
+  .contact-content-bottom textarea {
+    width: 100%;
+    height: 100px;
+    border: none;
+    outline: none;
+    padding: 12px;
+    background-color: #dddDDDDD; 
+  }
+  
+  .contact-content-bottom button {
+    margin-top: 20px;
+  }
+  
+  /*Các THể Loại màn hình */
+  @media (max-width: 575px) {
+    .header-content {
+      width: 100%;
+    }
+  
+    .nice-place {
+      padding: 50px 0;
+    }
+  
+    .nice-place-item {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 0; /* Bỏ padding để ảnh không bị lệch */
+    }
+  
+    .nice-place-item img {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .about {
+      padding: 50px 0;
+    }
+  
+    .about-content-left {
+      width: 100%;
+    }
+  
+    .about-content-right {
+      width: 100%;
+      padding: 0 12px;
+    }
+  
+    .service-item {
+      width: 100%;
+      margin-bottom: 20px;
+      margin: 12px;
+    }
+  
+    .tour {
+      padding: 50px 0;
+    }
+  
+    .tour-content-item-img {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 12px;
+    }
+  
+    .tour-content-item-text {
+      width: 100%;
+      padding: 12px;
+    }
+  
+    .review-item {
+      width: 100%;
+      margin-bottom: 20px;
+      margin: 12px;
+    }
+  
+    .contact-content-item {
+      width: 100%;
+    }
+  }
+  
+  button, .btn, #scroll-to-top {
+    transition: all 0.3s ease-in-out; /* Đảm bảo rằng hiệu ứng mượt mà */
+}
+
+button:hover, .btn:hover, #scroll-to-top:hover {
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2); /* Thêm hiệu ứng bóng đổ */
+    transform: translateY(-3px); /* Nhấc nhẹ nút lên khi hover */
+}
+
+.about-centent-left img {
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.about-centent-left:hover img {
+  transform: scale(1.05); /* Phóng to ảnh khi hover */
+  filter: brightness(90%); /* Làm tối ảnh một chút */
+}
+.review-item {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.review-item:hover {
+  transform: scale(1.05); /* Phóng to phần tử khi hover */
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Thêm hiệu ứng bóng đổ */
+}
+/* Hiệu ứng cuộn từ dưới lên */
+.scroll-effect {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 0.5s ease-out;
+}
+
+.scroll-effect.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#scroll-to-top::before {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*New Age-------------------------------------------------------------------*/
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Carousel */
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.review-item-text {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.review-item-text img {
+  width: 25px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+}
+
+.review-item-text p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.review-item-img {
+  display: flex;
+  align-items: center;
+}
+
+.review-item-img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review-item-img-text h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.review-item-img-text p {
+  margin: 0;
+  color: gray;
+}
+
+/* Nút điều hướng */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 1;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+
+
+/* Modal */
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 99999; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.9);
+  
+}
+
+/* Modal Content (the image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Footer chính */
+.footer-contact {
+  background: linear-gradient(
+    to right,
+    rgba(255, 0, 128, 0.7),   /* Hồng đậm */
+    rgba(112, 48, 160, 0.7)   /* Tím */
+  );
+  color: white;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Viền trắng mờ */
+  border-radius: 10px; /* Bo góc nhẹ cho đẹp */
+}
+
+
+
+
+
+
+/* Bố cục 3 cột */
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: flex-start;
+}
+
+/* Mỗi cột */
+.footer-column {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-column h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  padding-bottom: 5px;
+}
+
+.settings-container {
+  position: static;  /* thay fixed thành static để theo dòng menu */
+  top: auto;
+  right: auto;
+  z-index: auto;
+  display: inline-flex; /* để nằm ngang cùng các li khác */
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Giữ nguyên các thuộc tính khác */
+@media (max-width: 768px) {
+  .settings-container {
+    position: relative; /* để có thể dùng top/left */
+    top: -470px;
+    left: 100px;
+    z-index: 1000;
+  }
+}
+
+
+
+
+
+.settings-icon {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.settings-icon img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 0.5s ease;
+}
+
+/* Khi hover icon sẽ xoay và hiện các nút */
+.settings-container:hover .settings-icon img {
+  transform: rotate(360deg);
+}
+
+.settings-options {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.settings-container:hover .settings-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.settings-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background-color: white;
+  border: 1px solid gray;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.settings-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.settings-button:hover {
+  background-color: lightgray;
+  transform: translateX(-2px);
+}
+
+
+/* Danh sách icon */
+.contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact .icon img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border: 2px solid white;
+}
+
+/* Danh sách icon */
+.contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact .icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact .icon img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border: 2px solid white;
+}
+
+/* Tooltip luôn hiển thị và đổi màu */
+.contact .icon span {
+  visibility: visible; /* Hiển thị luôn */
+  opacity: 1; /* Hiển thị luôn */
+  background-color: dimgray;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 5px;
+  position: absolute;
+  left: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  z-index: 10;
+  animation: randomColor 3s infinite;
+  transition: none; /* không cần transition nếu luôn hiển thị */
+}
+
+.contact .icon span a {
+  color: white;
+  text-decoration: none;
+}
+
+.contact .icon span a:hover {
+  text-decoration: underline;
+}
+
+/* Hiệu ứng đổi màu tooltip */
+@keyframes randomColor {
+  0%   { background-color: #FF1493; }  /* Hồng đậm */
+  33%  { background-color: #FF7F50; }  /* Cam */
+  66%  { background-color: #6A0DAD; }  /* Tím đậm */
+  100% { background-color: #FF1493; }  /* Quay về hồng */
+}
+
+
+
+/* Nút đổi giao diện */
+.theme-switcher {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 999;
+}
+
+.theme-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background-color: whitesmoke;
+  color: black;
+  border: none;
+  border-radius: 25px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  background-color: darkgray;
+}
+
+.theme-button img {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  transition: transform 0.3s ease;
+}
+
+.theme-button:hover img {
+  transform: rotate(20deg);
+}
+
+/* Giao diện light */
+.light-mode {
+  background-image: linear-gradient(to right, #ffb6c1, #ff69b4, #6a0dad) !important;
+  background-color: unset !important;
+}
+
+.light-mode .section-link {
+  background-color: rgba(255, 255, 255, 0.8); /* trắng mờ để nổi bật nội dung */
+  color: #333;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+
+/* Giao diện dark mặc định */
+body {
+  background-color: #1e1e1e;
+  color: white;
+}
+/* Thêm hiệu ứng 'hiện dần' */
+.fade-in {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-duration: 1.5s;
+  animation-timing-function: ease-out;
+}
+
+/* Các animation khác nhau */
+@keyframes fadeInMoveUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    opacity: 0;
+    transform: rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+
+/*Dịch */
+/* Ẩn chữ khi ở màn hình nhỏ (mobile) */
+@media (max-width: 768px) {
+  .language-switcher button span,
+  .theme-button span {
+    display: none;
+  }
+}
+/* chuyển ngôn ngữ*/
+.language-switcher {
+  position: fixed;
+  top: 50px;
+  left: 20px;
+  display: flex;
+  gap: 10px; /* Khoảng cách giữa 2 nút */
+  z-index: 999;
+}
+
+.language-switcher button {
+  background-color: white;
+  color: cyan;
+  border: 2px solid cyan;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.language-switcher button img {
+  width: 20px;
+  height: 14px;
+}
+
+
+.language-switcher button:hover {
+  background-color: cyan;
+  color: red;
+}
+.language-switcher .flag-icon {
+  width: 24px;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.language-switcher button:hover .flag-icon {
+  transform: rotate(8deg) scale(1.1);
+}
+
+/* Icon quảng cáo ở góc dưới phải */
+.ad-icon {
+  position: fixed;
+  top: 60%; /* hoặc một giá trị phù hợp */
+  left: 20px;
+  z-index: 999;
+  cursor: pointer;
+  animation: bounce 1s infinite;
+}
+.ad-icon img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Nếu bạn muốn hình ảnh có viền tròn */
+}
+
+.ad-close {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 16px;
+  z-index: 1001;
+  cursor: pointer;
+  touch-action: none; /* Ngăn cản browser xử lý mặc định */
+}
+
+
+/* Hiệu Ứng */
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Di chuyển lên 10px */
+  }
+  100% {
+    transform: translateY(0); /* Quay lại vị trí ban đầu */
+  }
+}
+
+
+
+
+
+/* Quảng cáo */
+.promo-ad {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* Màu nền mờ */
+  display: none; /* Mặc định là ẩn */
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Đảm bảo quảng cáo hiển thị trên video và icon */
+}
+
+.promo-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+.promo-content h2 {
+  font-size: 24px;
+  color: var(--main-color);
+  margin-bottom: 20px;
+}
+
+.promo-content p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.promo-content button {
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.promo-content button:hover {
+  background-color: darkred;
+}
+/* Cửa sổ quảng cáo */
+.ad-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8); /* Màu nền bán trong suốt */
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  z-index: 999;
+  display: none; /* Ẩn cửa sổ quảng cáo mặc định */
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+  background-image: url("Hinh/ad2.png");
+  background-size: 120%; /* Phóng to ảnh nền lên 120% */
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Thêm bóng cho cửa sổ */
+ 
+}
+
+/* Hiệu ứng thay đổi màu chữ liên tục */
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  25% {
+    color: orange;
+  }
+  50% {
+    color: yellow;
+  }
+  75% {
+    color: green;
+  }
+  100% {
+    color: blue;
+  }
+}
+
+/* Áp dụng hiệu ứng màu cho tất cả các chữ trong quảng cáo */
+.ad-popup p,
+.ad-popup h2,
+.ad-popup button {
+  animation: colorChange 4s infinite; /* Chạy hiệu ứng màu liên tục */
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8); /* Thêm bóng chữ để dễ đọc */
+}
+
+/* Phần đóng cửa sổ quảng cáo (chữ X) */
+.ad-popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+/* Phần tiêu đề */
+.ad-popup h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Phần nội dung quảng cáo */
+.ad-popup p {
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+/* Nút Đặt Tour */
+.ad-popup button {
+  background-color: tomato;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.ad-popup button:hover {
+  background-color: darkred;
+}
+
+/* Hình ảnh trong dịch vụ */
+.service-item img {
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.service-item img:hover {
+  transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+}
+
+
+
+
+/* =================== SYMPTOM CHECKER AI STYLES =================== */
+.symptom-checker-toggler {
+  position: fixed;
+  right: 20px;
+  top: 50%; /* Căn giữa theo chiều dọc */
+  transform: translateY(-50%); /* Điều chỉnh để thực sự nằm giữa */
+  width: 55px; /* Kích thước nút */
+  height: 55px;
+  background-color: #27ae60; /* Màu xanh lá cây thân thiện */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.6em; /* Kích thước icon */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  z-index: 9980; /* Đảm bảo vị trí phù hợp */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.symptom-checker-toggler:hover {
+  transform: translateY(-50%) scale(1.1); /* Giữ nguyên transform Y khi scale */
+  background-color: #2ecc71;
+}
+.symptom-checker-toggler .symptom-checker-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 6px 12px;
+  position: absolute;
+  z-index: 1;
+  bottom: 50%; /* Căn giữa với nút */
+  right: 120%; /* Bên trái nút */
+  transform: translateY(50%);
+  transition: opacity 0.2s, visibility 0.2s;
+  font-size: 0.65em;
+  white-space: nowrap;
+}
+.symptom-checker-toggler:hover .symptom-checker-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.symptom-checker-widget {
+  position: fixed;
+  bottom: 20px; /* Hoặc giá trị bạn muốn để nó không che nút toggler */
+  right: 20px;  /* Hoặc cách nút toggler 1 khoảng nếu muốn */
+  /* Nếu muốn chatbox xuất hiện gần nút toggler khi nó ở giữa:
+  top: 50%;
+  right: 90px; 
+  transform: translateY(-50%);
+  bottom: auto; 
+  */
+  width: 90%;
+  max-width: 370px;
+  height: auto;
+  max-height: 80vh; /* Tăng chiều cao tối đa một chút */
+  background-color: #ffffff;
+  color: #333333;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  z-index: 9985;
+  display: none; /* Sẽ được JS đổi thành 'flex' */
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #dadce0;
+}
+body.dark-mode .symptom-checker-widget {
+  background-color: #3c3c3e; /* Màu nền tối hơn cho chatbox */
+  color: #f0f0f0;
+  border-color: #5a5a5e;
+}
+
+.symptom-checker-header {
+  background-color: #27ae60; /* Đồng bộ với nút toggler */
+  color: white;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 11px; /* Bo góc khớp với widget */
+  border-top-right-radius: 11px;
+}
+body.dark-mode .symptom-checker-header {
+  background-color: #1e8e4d;
+}
+.symptom-checker-header h2 {
+  font-size: 1.15em;
+  margin: 0;
+  font-weight: 500;
+}
+.symptom-checker-close-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.85);
+  font-size: 1.3em;
+  cursor: pointer;
+  padding: 0 3px;
+}
+.symptom-checker-close-btn:hover {
+  color: #fff;
+}
+
+.symptom-checker-content {
+  padding: 18px;
+  overflow-y: auto;
+  flex-grow: 1;
+  text-align: center;
+  background-color: #f7f9fa; /* Nền sáng nhẹ cho content */
+}
+body.dark-mode .symptom-checker-content {
+  background-color: #303033; /* Nền tối cho content */
+}
+
+.symptom-checker-progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    margin: 0 auto 18px auto;
+    overflow: hidden;
+}
+body.dark-mode .symptom-checker-progress-bar {
+    background-color: #555;
+}
+#symptomCheckerProgressBarFill {
+    width: 0%;
+    height: 100%;
+    background-color: #27ae60; /* Màu xanh của header */
+    border-radius: 3px;
+    transition: width 0.4s ease-in-out;
+}
+
+.symptom-checker-content p#symptomCheckerQuestionText {
+  font-size: 1em;
+  margin-bottom: 18px;
+  line-height: 1.5;
+  min-height: 2.8em;
+  color: #333;
+}
+body.dark-mode .symptom-checker-content p#symptomCheckerQuestionText {
+  color: #e0e0e0;
+}
+
+.symptom-checker-options {
+  display: flex;
+  flex-direction: column; /* Các nút lựa chọn xếp dọc */
+  align-items: stretch; /* Kéo dài các nút */
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.symptom-checker-option-btn {
+  background-color: #fff;
+  color: #27ae60; /* Chữ màu xanh */
+  border: 1px solid #27ae60; /* Viền màu xanh */
+  padding: 10px 15px;
+  font-size: 0.9em;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s, color 0.2s, transform 0.15s;
+  width: 100%; /* Chiếm hết chiều rộng */
+  text-align: center;
+  font-weight: 500;
+}
+.symptom-checker-option-btn:hover {
+  background-color: #27ae60;
+  color: white;
+  transform: translateY(-1px);
+}
+body.dark-mode .symptom-checker-option-btn {
+  background-color: #4a4a52;
+  color: #90d8a9; /* Xanh lá nhạt cho dark mode */
+  border-color: #90d8a9;
+}
+body.dark-mode .symptom-checker-option-btn:hover {
+  background-color: #90d8a9;
+  color: #2d2d30; /* Chữ màu nền tối khi hover */
+}
+
+
+.symptom-checker-result {
+    margin-top: 15px;
+    padding: 0;
+}
+.symptom-checker-result h3#symptomCheckerGuess {
+    font-size: 1.15em;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+body.dark-mode .symptom-checker-result h3#symptomCheckerGuess {
+    color: #e0e0e0;
+}
+.symptom-checker-result #symptomCheckerPredictedDisease {
+    color: #c0392b; /* Màu đỏ cho tên bệnh */
+    font-weight: 700;
+}
+body.dark-mode .symptom-checker-result #symptomCheckerPredictedDisease {
+    color: #ff7979;
+}
+.symptom-checker-result p[data-i18n="symptom_checker_is_it_correct"] {
+    font-size: 1em;
+    margin-bottom: 15px;
+     color: #555;
+}
+body.dark-mode .symptom-checker-result p[data-i18n="symptom_checker_is_it_correct"] {
+    color: #bbb;
+}
+/* Nút Đúng/Sai trong kết quả sẽ dùng chung style .symptom-checker-option-btn */
+.symptom-checker-result .symptom-checker-option-btn {
+    display: inline-block; /* Cho phép nằm ngang */
+    width: auto; /* Tự co theo nội dung */
+    min-width: 80px;
+    margin: 0 5px;
+}
+
+
+.symptom-checker-back-btn {
+  background-color: #e0e0e0;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 7px 12px;
+  font-size: 0.8em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 15px;
+  display: inline-block;
+}
+body.dark-mode .symptom-checker-back-btn {
+    background-color: #5a5a62;
+    color: #ddd;
+    border-color: #777;
+}
+.symptom-checker-back-btn:hover {
+    background-color: #d0d0d0;
+}
+body.dark-mode .symptom-checker-back-btn:hover {
+    background-color: #6a6a72;
+}
+
+
+.symptom-checker-result-feedback-text {
+  margin-top: 15px;
+  padding: 12px;
+  font-size: 0.9em;
+  line-height: 1.5;
+  text-align: left;
+  border-radius: 6px;
+  background-color: #e6f4ea; /* Nền xanh lá nhạt cho feedback */
+  border: 1px solid #c8e6c9;
+  color: #2e7d32;
+}
+body.dark-mode .symptom-checker-result-feedback-text {
+  background-color: #2e4b37; /* Nền xanh đậm cho feedback dark mode */
+  border-color: #385741;
+  color: #b2dfdb;
+}
+.symptom-checker-result-feedback-text strong {
+    font-weight: 600;
+    color: #1b5e20; /* Màu đậm hơn cho tên bệnh */
+}
+body.dark-mode .symptom-checker-result-feedback-text strong {
+    color: #81c784;
+}
+.symptom-checker-result-feedback-text em {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+
+.symptom-checker-footer {
+  padding: 10px 18px;
+  background-color: #ebeef1;
+  border-top: 1px solid #dadce0;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+}
+body.dark-mode .symptom-checker-footer {
+  background-color: #2a2a2d;
+  border-top-color: #3f3f42;
+}
+.symptom-checker-footer .disclaimer {
+  font-size: 0.75em;
+  color: #666;
+  margin: 0;
+  text-align: center;
+  line-height: 1.3;
+}
+body.dark-mode .symptom-checker-footer .disclaimer {
+  color: #aaa;
+}
+
+
+/* Responsive cho Chatbox AI */
+@media (max-width: 480px) {
+  .symptom-checker-toggler {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4em;
+    right: 15px;
+    bottom: 15px;
+  }
+  .symptom-checker-widget {
+    right: 10px;
+    bottom: 10px; /* Gần hơn với nút toggler nếu nó cũng dịch chuyển */
+    max-width: calc(100% - 20px); /* Chiếm gần hết chiều rộng */
+    max-height: 85vh;
+  }
+   /* Nếu muốn chatbox hiện gần nút toggler khi nút ở giữa màn hình */
+  /* .symptom-checker-widget {
+    right: 10px; 
+    top: auto; 
+    bottom: 80px; 
+    transform: none; 
+  } */
+  .symptom-checker-header h2 {
+    font-size: 1.1em;
+  }
+  .symptom-checker-content {
+    padding: 15px;
+  }
+   .symptom-checker-option-btn {
+    padding: 10px 12px;
+    font-size: 0.85em;
+  }
+}
